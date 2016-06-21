@@ -1,5 +1,5 @@
 
-<h1> news </h1>
+<h1> good news  </h1>
 <?php foreach($news as $item) : ?>
 
 <h2> <?=$item->title ?> </h2>
