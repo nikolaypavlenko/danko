@@ -12,6 +12,7 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+use common\models\News;
 
 /**
  * Site controller
@@ -34,6 +35,20 @@ class SiteController extends Controller
         ]);
     }
 
+public function actionNews()
+    {
+     
+        $model =  new News();
+        $news = $model->find()->all();
+        //var_dump($news);
+        //die();
+
+        return $this->render ('news',  [
+           'news'=>$news
+
+
+        ]);
+    }
 
 
     /**
