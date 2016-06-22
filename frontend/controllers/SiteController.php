@@ -50,6 +50,21 @@ public function actionNews()
         ]);
     }
 
+public function actionTag()
+    {
+     
+        /*$model =  new News();
+        $news = $model->find()->all();
+        //var_dump($news);
+        //die();*/
+
+        return $this->render ('tag',  [
+           //'news'=>$news
+
+
+        ]);
+    }
+
 
     /**
      * @inheritdoc
