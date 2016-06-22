@@ -5,12 +5,12 @@ namespace backend\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\news;
+use common\models\tag;
 
 /**
- * NewsSearch represents the model behind the search form about `common\models\news`.
+ * TagSearch represents the model behind the search form about `app\models\Tag`.
  */
-class NewsSearch extends news
+class TagSearch extends Tag
 {
     /**
      * @inheritdoc
@@ -19,7 +19,7 @@ class NewsSearch extends news
     {
         return [
             [['id'], 'integer'],
-            [['title', 'text', 'img', 'create_date', 'id_tag'], 'safe'],
+            [['name_teg'], 'safe'],
         ];
     }
 
@@ -41,7 +41,7 @@ class NewsSearch extends news
      */
     public function search($params)
     {
-        $query = news::find();
+        $query = Tag::find();
 
         // add conditions that should always apply here
 
@@ -60,14 +60,9 @@ class NewsSearch extends news
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'create_date' => $this->create_date,
         ]);
 
-        $query->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'text', $this->text])
-            ->andFilterWhere(['like', 'img', $this->img]);
-            ->andFilterWhere(['like', 'id_tag', $this->id_tag]);
-
+        $query->andFilterWhere(['like', 'name_teg', $this->name_teg]);
 
         return $dataProvider;
     }
