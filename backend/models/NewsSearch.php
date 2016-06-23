@@ -5,12 +5,12 @@ namespace backend\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\news;
+use app\models\News;
 
 /**
- * NewsSearch represents the model behind the search form about `common\models\news`.
+ * NewsSearch represents the model behind the search form about `app\models\News`.
  */
-class NewsSearch extends news
+class NewsSearch extends News
 {
     /**
      * @inheritdoc
@@ -41,7 +41,7 @@ class NewsSearch extends news
      */
     public function search($params)
     {
-        $query = news::find();
+        $query = News::find();
 
         // add conditions that should always apply here
 
@@ -65,9 +65,8 @@ class NewsSearch extends news
 
         $query->andFilterWhere(['like', 'title', $this->title])
             ->andFilterWhere(['like', 'text', $this->text])
-            ->andFilterWhere(['like', 'img', $this->img]);
+            ->andFilterWhere(['like', 'img', $this->img])
             ->andFilterWhere(['like', 'id_tag', $this->id_tag]);
-
 
         return $dataProvider;
     }

@@ -3,14 +3,16 @@
 namespace backend\controllers;
 
 use Yii;
-use common\models\news;
+use app\models\News;
+//use backend\models\News;
+
 use backend\models\NewsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * NewsController implements the CRUD actions for news model.
+ * NewsController implements the CRUD actions for News model.
  */
 class NewsController extends Controller
 {
@@ -30,7 +32,7 @@ class NewsController extends Controller
     }
 
     /**
-     * Lists all news models.
+     * Lists all News models.
      * @return mixed
      */
     public function actionIndex()
@@ -45,7 +47,7 @@ class NewsController extends Controller
     }
 
     /**
-     * Displays a single news model.
+     * Displays a single News model.
      * @param integer $id
      * @return mixed
      */
@@ -57,13 +59,13 @@ class NewsController extends Controller
     }
 
     /**
-     * Creates a new news model.
+     * Creates a new News model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new news();
+        $model = new News();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -75,7 +77,7 @@ class NewsController extends Controller
     }
 
     /**
-     * Updates an existing news model.
+     * Updates an existing News model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -94,7 +96,7 @@ class NewsController extends Controller
     }
 
     /**
-     * Deletes an existing news model.
+     * Deletes an existing News model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -107,15 +109,15 @@ class NewsController extends Controller
     }
 
     /**
-     * Finds the news model based on its primary key value.
+     * Finds the News model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return news the loaded model
+     * @return News the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = news::findOne($id)) !== null) {
+        if (($model = News::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

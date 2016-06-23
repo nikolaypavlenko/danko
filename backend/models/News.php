@@ -1,6 +1,6 @@
 <?php
 
-namespace common\models;
+namespace app\models;
 
 use Yii;
 
@@ -16,7 +16,6 @@ use Yii;
  */
 class News extends \yii\db\ActiveRecord
 {
-
     /**
      * @inheritdoc
      */

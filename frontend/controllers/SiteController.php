@@ -13,6 +13,8 @@ use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
 use common\models\News;
+use common\models\Tag;
+
 
 /**
  * Site controller
@@ -34,36 +36,37 @@ class SiteController extends Controller
             'tel' => $tel
         ]);
     }
-
 public function actionNews()
     {
-     
+
         $model =  new News();
-        $news = $model->find()->all();
-        //var_dump($news);
-        //die();
+        $news = $model->find()->orderBy(['id'=>sort_DESC])->all();
 
+        $modelTag = new Tag();
+        $tag = $modelTag->find()->all();
+
+        foreach ($news as  $item) {
+            foreach ($tag as  $unit) {
+                if($item->id_tag == $unit->id) {
+                    $join[] = [
+                        'title' => $item->title,
+                        'text' => $item->text,
+                        'create_date' => $item->create_date,
+                        'name_teg' => $unit->name_teg
+                   ];
+                }
+            }
+        }
+       
+       //var_dump($join);
+       //die();
         return $this->render ('news',  [
-           'news'=>$news
-
-
+           'join' => $join,
+           'news' => $news
         ]);
     }
 
-public function actionTag()
-    {
-     
-        /*$model =  new News();
-        $news = $model->find()->all();
-        //var_dump($news);
-        //die();*/
 
-        return $this->render ('tag',  [
-           //'news'=>$news
-
-
-        ]);
-    }
 
 
     /**

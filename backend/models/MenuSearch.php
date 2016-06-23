@@ -1,16 +1,16 @@
 <?php
 
-namespace app\models;
+namespace backend\models;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Tag;
+use backend\models\Menu;
 
 /**
- * TagSearch represents the model behind the search form about `app\models\Tag`.
+ * MenuSearch represents the model behind the search form about `backend\models\Menu`.
  */
-class TagSearch extends Tag
+class MenuSearch extends Menu
 {
     /**
      * @inheritdoc
@@ -19,7 +19,7 @@ class TagSearch extends Tag
     {
         return [
             [['id'], 'integer'],
-            [['name_teg'], 'safe'],
+            [['label', 'url'], 'safe'],
         ];
     }
 
@@ -41,7 +41,7 @@ class TagSearch extends Tag
      */
     public function search($params)
     {
-        $query = Tag::find();
+        $query = Menu::find();
 
         // add conditions that should always apply here
 
@@ -62,7 +62,8 @@ class TagSearch extends Tag
             'id' => $this->id,
         ]);
 
-        $query->andFilterWhere(['like', 'name_teg', $this->name_teg]);
+        $query->andFilterWhere(['like', 'label', $this->label])
+            ->andFilterWhere(['like', 'url', $this->url]);
 
         return $dataProvider;
     }

@@ -1,23 +1,24 @@
 <?php
 
-namespace app\models;
+namespace backend\models;
 
 use Yii;
 
 /**
- * This is the model class for table "tag".
+ * This is the model class for table "menu".
  *
  * @property integer $id
- * @property string $name_teg
+ * @property string $label
+ * @property string $url
  */
-class Tag extends \yii\db\ActiveRecord
+class Menu extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'tag';
+        return 'menu';
     }
 
     /**
@@ -26,8 +27,9 @@ class Tag extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name_teg'], 'required'],
-            [['name_teg'], 'string', 'max' => 255],
+            [['label', 'url'], 'required'],
+            [['label'], 'string', 'max' => 30],
+            [['url'], 'string', 'max' => 255],
         ];
     }
 
@@ -38,7 +40,8 @@ class Tag extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name_teg' => 'Name Teg',
+            'label' => 'Label',
+            'url' => 'Url',
         ];
     }
 }

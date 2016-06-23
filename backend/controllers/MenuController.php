@@ -1,18 +1,18 @@
 <?php
 
-namespace app\controllers;
+namespace backend\controllers;
 
 use Yii;
-use app\models\Tag;
-use app\models\TagSearch;
+use backend\models\Menu;
+use backend\models\MenuSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * TagController implements the CRUD actions for Tag model.
+ * MenuController implements the CRUD actions for Menu model.
  */
-class TagController extends Controller
+class MenuController extends Controller
 {
     /**
      * @inheritdoc
@@ -30,12 +30,12 @@ class TagController extends Controller
     }
 
     /**
-     * Lists all Tag models.
+     * Lists all Menu models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new TagSearch();
+        $searchModel = new MenuSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,7 +45,7 @@ class TagController extends Controller
     }
 
     /**
-     * Displays a single Tag model.
+     * Displays a single Menu model.
      * @param integer $id
      * @return mixed
      */
@@ -57,13 +57,13 @@ class TagController extends Controller
     }
 
     /**
-     * Creates a new Tag model.
+     * Creates a new Menu model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Tag();
+        $model = new Menu();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -75,7 +75,7 @@ class TagController extends Controller
     }
 
     /**
-     * Updates an existing Tag model.
+     * Updates an existing Menu model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -94,7 +94,7 @@ class TagController extends Controller
     }
 
     /**
-     * Deletes an existing Tag model.
+     * Deletes an existing Menu model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -107,15 +107,15 @@ class TagController extends Controller
     }
 
     /**
-     * Finds the Tag model based on its primary key value.
+     * Finds the Menu model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Tag the loaded model
+     * @return Menu the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Tag::findOne($id)) !== null) {
+        if (($model = Menu::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
