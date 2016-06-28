@@ -13,9 +13,8 @@ use Yii;
  * @property string $img
  * @property string $create_date
  */
-class News extends \yii\db\ActiveRecord
+class Page extends \yii\db\ActiveRecord
 {
-    public $file;
     /**
      * @inheritdoc
      */
@@ -32,9 +31,8 @@ class News extends \yii\db\ActiveRecord
         return [
             [['title', 'text', 'img', 'create_date'], 'required'],
             [['text'], 'string'],
-            [['create_date', 'user_id'], 'safe'],
-            [['title', 'img'], 'string', 'max' => 5],
-            [['file'], 'file', 'extensions'=>'jpg, png']
+            [['create_date'], 'safe'],
+            [['title', 'img'], 'string', 'max' => 255],
         ];
     }
 
@@ -49,12 +47,6 @@ class News extends \yii\db\ActiveRecord
             'text' => 'Text',
             'img' => 'Img',
             'create_date' => 'Create Date',
-            'user_id' => 'Пользователь',
         ];
-    }
-
-    public function getUser() 
-    {
-        return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
 }

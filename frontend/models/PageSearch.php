@@ -1,16 +1,16 @@
 <?php
 
-namespace backend\models;
+namespace frontend\models;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\tag;
+use common\models\page;
 
 /**
- * TagSearch represents the model behind the search form about `app\models\Tag`.
+ * PageSearch represents the model behind the search form about `common\models\page`.
  */
-class TagSearch extends Tag
+class PageSearch extends page
 {
     /**
      * @inheritdoc
@@ -19,7 +19,7 @@ class TagSearch extends Tag
     {
         return [
             [['id'], 'integer'],
-            [['name_tag'], 'safe'],
+            [['title', 'text', 'img', 'create_date'], 'safe'],
         ];
     }
 
@@ -41,7 +41,7 @@ class TagSearch extends Tag
      */
     public function search($params)
     {
-        $query = Tag::find();
+        $query = page::find();
 
         // add conditions that should always apply here
 
@@ -60,9 +60,12 @@ class TagSearch extends Tag
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'create_date' => $this->create_date,
         ]);
 
-        $query->andFilterWhere(['like', 'name_tag', $this->name_tag]);
+        $query->andFilterWhere(['like', 'title', $this->title])
+            ->andFilterWhere(['like', 'text', $this->text])
+            ->andFilterWhere(['like', 'img', $this->img]);
 
         return $dataProvider;
     }

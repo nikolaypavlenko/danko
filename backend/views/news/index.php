@@ -29,7 +29,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'text:ntext',
             'img',
             'create_date',
-            'id_tag',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

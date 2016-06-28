@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models;
+namespace backend\models;
 
 use Yii;
 
@@ -8,7 +8,7 @@ use Yii;
  * This is the model class for table "tag".
  *
  * @property integer $id
- * @property string $name_teg
+ * @property integer $name_tag
  */
 class Tag extends \yii\db\ActiveRecord
 {
@@ -26,8 +26,8 @@ class Tag extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name_teg'], 'required'],
-            [['name_teg'], 'string', 'max' => 255],
+            [['id', 'name_tag'], 'required'],
+            [['id', 'name_tag'], 'integer'],
         ];
     }
 
@@ -38,7 +38,7 @@ class Tag extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name_teg' => 'Name Teg',
+            'name_tag' => 'Name Tag',
         ];
     }
 }

@@ -2,17 +2,15 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\News */
+/* @var $model common\models\page */
 /* @var $form yii\widgets\ActiveForm */
-/* @var $ */
 ?>
 
-<div class="news-form">
+<div class="page-form">
 
-    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data'] ]); ?>
+    <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
@@ -21,13 +19,6 @@ use yii\helpers\ArrayHelper;
     <?= $form->field($model, 'img')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'create_date')->textInput() ?>
-
-    <?= $form->field($model, 'file')->fileInput() ?>
-
-    <?= $form->field($model, 'user_id')->dropDownList([ArrayHelper::map($user,'id', 'username')]) ?>
-
-
-
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

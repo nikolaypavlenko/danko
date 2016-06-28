@@ -1,23 +1,18 @@
 <?php
 
-namespace backend\controllers;
+namespace frontend\controllers;
 
 use Yii;
-use common\models\News;
-//use backend\models\News;
-
-use backend\models\NewsSearch;
+use common\models\page;
+use frontend\models\PageSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\web\UploadedFile;
-use common\models\User;
-
 
 /**
- * NewsController implements the CRUD actions for News model.
+ * PageController implements the CRUD actions for page model.
  */
-class NewsController extends Controller
+class PageController extends Controller
 {
     /**
      * @inheritdoc
@@ -35,12 +30,12 @@ class NewsController extends Controller
     }
 
     /**
-     * Lists all News models.
+     * Lists all page models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new NewsSearch();
+        $searchModel = new PageSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -50,7 +45,7 @@ class NewsController extends Controller
     }
 
     /**
-     * Displays a single News model.
+     * Displays a single page model.
      * @param integer $id
      * @return mixed
      */
@@ -62,37 +57,25 @@ class NewsController extends Controller
     }
 
     /**
-     * Creates a new News model.
+     * Creates a new page model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new News();
-        $user = User::find()->all();
+        $model = new page();
 
-
-        if ($model->load(Yii::$app->request->post()) ) {
-            $model->file = UploadedFile::getInstance($model, 'file');
-            if($model->file){    
-            $model->file->saveAs(Yii::getAlias('@frontend/web/images/') . md5($model->id) . '.' . $model->file->extension);
-            $model->img = '/frontend/web/images/' . md5($model->id) . '.' . $model->file->extension;
-            //var_dump($model->img);
-            //die();
-            }
-            $model->save(false);
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
-                'user' => $user
-
             ]);
         }
     }
 
     /**
-     * Updates an existing News model.
+     * Updates an existing page model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -111,7 +94,7 @@ class NewsController extends Controller
     }
 
     /**
-     * Deletes an existing News model.
+     * Deletes an existing page model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -124,15 +107,15 @@ class NewsController extends Controller
     }
 
     /**
-     * Finds the News model based on its primary key value.
+     * Finds the page model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return News the loaded model
+     * @return page the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = News::findOne($id)) !== null) {
+        if (($model = page::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

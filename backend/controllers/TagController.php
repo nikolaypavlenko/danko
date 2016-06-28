@@ -8,6 +8,8 @@ use backend\models\TagSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
+
 
 /**
  * TagController implements the CRUD actions for Tag model.
@@ -66,6 +68,14 @@ class TagController extends Controller
         $model = new Tag();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $model->file = UploadedFile::getInstance($model, 'file');
+            $model->file->saveAs(Yii::getAlias('@frontend/web/images/') . md5($model->id) . '.' . $model->file->extension);
+            $model->img = '/frontend/web/images/' . md5($model->id) . '.' . $uploadimg->file->extension;
+            //var_dump($model->img);
+            //die();
+            $model->save(false);
+
+
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [

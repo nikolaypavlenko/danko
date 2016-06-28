@@ -13,7 +13,10 @@ use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
 use common\models\News;
-use common\models\Tag;
+use common\models\Page;
+use common\models\User;
+
+
 
 
 /**
@@ -21,52 +24,29 @@ use common\models\Tag;
  */
 class SiteController extends Controller
 {
-    public function actionInfo($nik="Nik", $email="nnik@bk.ru", $tel=101)
+    public function actionPage()
     {
-       $name = 'kolya';
-       $mail = 'test@mail.com';
-        $tel = '+380';
+        
+        $page = Page::find()->select('img')->column();
 
-        return $this->render ('info',  [
-            /*'nik' => $nik,
-            'email' => $email,
-            'tel' => $tel*/
-            'name' => $name,
-            'mail' => $mail,
-            'tel' => $tel
+        return $this->render ('page',  [
+            'page' => $page
         ]);
     }
-public function actionNews()
+
+    public function actionNews()
     {
 
         $model =  new News();
         $news = $model->find()->orderBy(['id'=>sort_DESC])->all();
 
-        $modelTag = new Tag();
-        $tag = $modelTag->find()->all();
+        $users = User::find()->all();
 
-        foreach ($news as  $item) {
-            foreach ($tag as  $unit) {
-                if($item->id_tag == $unit->id) {
-                    $join[] = [
-                        'title' => $item->title,
-                        'text' => $item->text,
-                        'create_date' => $item->create_date,
-                        'name_teg' => $unit->name_teg
-                   ];
-                }
-            }
-        }
-       
-       //var_dump($join);
-       //die();
         return $this->render ('news',  [
-           'join' => $join,
-           'news' => $news
+           'news' => $news,
+           'users' => $users
         ]);
     }
-
-
 
 
     /**

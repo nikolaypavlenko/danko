@@ -8,10 +8,12 @@ use Yii;
  * This is the model class for table "tag".
  *
  * @property integer $id
- * @property string $name_teg
+ * @property string $name_tag
  */
 class Tag extends \yii\db\ActiveRecord
 {
+    public $file;
+
     /**
      * @inheritdoc
      */
@@ -26,8 +28,10 @@ class Tag extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name_teg'], 'required'],
-            [['name_teg'], 'string', 'max' => 255],
+            [['name_tag'], 'required'],
+            [['name_tag'], 'string', 'max' => 255],
+            [['file'], 'file', 'extensions'=>'jpg, png']
+
         ];
     }
 
@@ -38,7 +42,7 @@ class Tag extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name_teg' => 'Name Teg',
+            'name_tag' => 'Name Tag',
         ];
     }
 }
