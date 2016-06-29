@@ -14,7 +14,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'name_tag')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'file')->fileInput() ?>
+    <?php //= $form->field($model, 'file')->fileInput() ?>
 
 
     <div class="form-group">

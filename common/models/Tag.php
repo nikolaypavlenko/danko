@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use common\models\News;
 use Yii;
 
 /**
@@ -12,8 +13,6 @@ use Yii;
  */
 class Tag extends \yii\db\ActiveRecord
 {
-    public $file;
-
     /**
      * @inheritdoc
      */
@@ -30,8 +29,6 @@ class Tag extends \yii\db\ActiveRecord
         return [
             [['name_tag'], 'required'],
             [['name_tag'], 'string', 'max' => 255],
-            [['file'], 'file', 'extensions'=>'jpg, png']
-
         ];
     }
 
@@ -44,5 +41,10 @@ class Tag extends \yii\db\ActiveRecord
             'id' => 'ID',
             'name_tag' => 'Name Tag',
         ];
+    }
+
+    public function getNews()
+    {
+             return $this->hasMany(News::className(), ['tag_id' => 'id']);
     }
 }

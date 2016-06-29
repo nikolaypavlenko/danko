@@ -4,7 +4,6 @@ namespace backend\controllers;
 
 use Yii;
 use common\models\News;
-//use backend\models\News;
 
 use backend\models\NewsSearch;
 use yii\web\Controller;
@@ -12,6 +11,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
 use common\models\User;
+use common\models\Tag;
 
 
 /**
@@ -70,22 +70,21 @@ class NewsController extends Controller
     {
         $model = new News();
         $user = User::find()->all();
+        $tag = Tag::find()->all();
 
-
-        if ($model->load(Yii::$app->request->post()) ) {
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             $model->file = UploadedFile::getInstance($model, 'file');
             if($model->file){    
             $model->file->saveAs(Yii::getAlias('@frontend/web/images/') . md5($model->id) . '.' . $model->file->extension);
             $model->img = '/frontend/web/images/' . md5($model->id) . '.' . $model->file->extension;
-            //var_dump($model->img);
-            //die();
             }
             $model->save(false);
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
-                'user' => $user
+                'user' => $user,
+                'tag' => $tag
 
             ]);
         }
@@ -100,12 +99,22 @@ class NewsController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $user = User::find()->all();
+        $tag = Tag::find()->all();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) ) {
+            $model->file = UploadedFile::getInstance($model, 'file');
+            if($model->file){    
+            $model->file->saveAs(Yii::getAlias('@frontend/web/images/') . md5($model->id) . '.' . $model->file->extension);
+            $model->img = '/frontend/web/images/' . md5($model->id) . '.' . $model->file->extension;
+            }
+            $model->save(false);
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'user' => $user,
+                'tag' => $tag
             ]);
         }
     }

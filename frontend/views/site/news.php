@@ -1,39 +1,39 @@
-<h1> good news  </h1>
-
-
 
 <?php foreach($news as $item) : ?>
 
 
-<h2> <?=$item->title?>  </h2>
+<h2 style="color:green"> Новость <?=$item->title?>  </h2>
 
+<p> <?=$item->text ?>    </p>
 
-<h6> <?=$item->text ?>       <?=$item->create_date ?>   </h6> 
+<h5 style="font-style:italic">  <?=$item->create_date ?>   </h5> 
 
-<h6> <?=$item->user->username ?> </h6>
+<span style="font-weight:bold; font-size:15px"> <?=$item->user->username ?> </span>
 
+<h6 style="color:blue; font-style:italic"> <?=$item->tag->name_tag ?> </h6><br>
 
 <?php endforeach; ?>
+
+//////////////////////////////////////////////////////
 
 <?php foreach($users as $user) : ?>
 
-<h6> <?=$user->username ?> </h6>
+	<h6 style="font-style:italic"> <?=$user->username ?> </h6>
 
-<h6> <?php //$user->title ?> </h6>
-
-
-	<?php foreach($user->news as $news): ?>
-			
-		<?=$news->title ?>
-
-
-	<?php endforeach; ?>
-
+		<?php foreach($user->news as $news): ?>
+				<?=$news->title ?> <br>
+		<?php endforeach; ?>
 
 <?php endforeach; ?>
 
+<br><br> //////////////////////////////////////////////
 
+<?php foreach($tags as $tag) : ?>
 
-<div> </div>
+	<h6 style="font-style:italic"> <?=$tag->name_tag ?> </h6>
 
-<span> </span>
+		<?php foreach($tag->news as $news): ?>
+				<?=$news->title ?> <br>
+		<?php endforeach; ?>
+
+<?php endforeach; ?>

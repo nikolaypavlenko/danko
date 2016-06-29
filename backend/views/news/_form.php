@@ -26,7 +26,7 @@ use yii\helpers\ArrayHelper;
 
     <?= $form->field($model, 'user_id')->dropDownList([ArrayHelper::map($user,'id', 'username')]) ?>
 
-
+    <?= $form->field($model, 'tag_id')->dropDownList([ArrayHelper::map($tag,'id', 'name_tag')]) ?>
 
 
     <div class="form-group">

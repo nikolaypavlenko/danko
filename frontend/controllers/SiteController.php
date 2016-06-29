@@ -15,7 +15,7 @@ use frontend\models\ContactForm;
 use common\models\News;
 use common\models\Page;
 use common\models\User;
-
+use common\models\Tag;
 
 
 
@@ -39,12 +39,13 @@ class SiteController extends Controller
 
         $model =  new News();
         $news = $model->find()->orderBy(['id'=>sort_DESC])->all();
-
         $users = User::find()->all();
+        $tags = Tag::find()->all();
 
         return $this->render ('news',  [
            'news' => $news,
-           'users' => $users
+           'users' => $users,
+           'tags' => $tags
         ]);
     }
 

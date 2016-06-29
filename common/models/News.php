@@ -32,8 +32,8 @@ class News extends \yii\db\ActiveRecord
         return [
             [['title', 'text', 'img', 'create_date'], 'required'],
             [['text'], 'string'],
-            [['create_date', 'user_id'], 'safe'],
-            [['title', 'img'], 'string', 'max' => 5],
+            [['create_date', 'user_id', 'tag_id'], 'safe'],
+            [['title', 'img'], 'string', 'max' => 42],
             [['file'], 'file', 'extensions'=>'jpg, png']
         ];
     }
@@ -50,11 +50,18 @@ class News extends \yii\db\ActiveRecord
             'img' => 'Img',
             'create_date' => 'Create Date',
             'user_id' => 'Пользователь',
+            'tag_id' => 'Тег'
+
         ];
     }
 
-    public function getUser() 
+   public function getUser() 
     {
         return $this->hasOne(User::className(), ['id' => 'user_id']);
+    }
+
+    public function getTag() 
+    {
+        return $this->hasOne(Tag::className(), ['id' => 'tag_id']);
     }
 }
