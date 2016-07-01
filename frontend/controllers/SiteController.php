@@ -26,7 +26,25 @@ class SiteController extends Controller
 {
     public function actionPage()
     {
-        
+        //$posts = Yii::$app->db->createCommand('SELECT * FROM `news` LEFT JOIN `tag` ON `news`.`tag_id`=`tag`.`id`')
+           // ->queryAll();
+       /* $posts = Yii::$app->db->createCommand('SELECT `news`.`id`, `tag`.`name_tag`
+                                                 FROM `news` 
+                                                 RIGHT JOIN `tag` ON `news`.`tag_id`=`tag`.`id`
+                                              ')
+        ->queryAll();*/
+
+       /* $posts = Yii::$app->db->createCommand('SELECT `news`.`id`, `tag`.`name_tag`
+                                                 FROM `news` 
+                                                 RIGHT JOIN `tag` ON `news`.`tag_id`=`tag`.`id`
+                                                 WHERE `news`.`id` = 22
+                                              ')
+        ->queryAll();*/
+
+
+          
+
+
         $page = Page::find()->select('img')->column();
 
         return $this->render ('page',  [
@@ -53,6 +71,17 @@ class SiteController extends Controller
     /**
      * @inheritdoc
      */
+
+    public function actionTest($id)
+    {
+        $news = News::find()->where(['id'=>$id])->one();
+
+                return $this->render ('datailnews', [
+                           'news' => $news,
+                           ]);
+
+    }
+
     public function behaviors()
     {
         return [
